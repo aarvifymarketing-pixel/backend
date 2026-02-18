@@ -45,7 +45,10 @@ const transporter = nodemailer.createTransport({
     },
     tls: {
         rejectUnauthorized: false
-    }
+    },
+    connectionTimeout: 10000, // 10 seconds timeout
+    logger: true, // Log to console
+    debug: true   // Include debug info
 });
 
 // Verify SMTP connection on startup
@@ -138,7 +141,7 @@ app.post('/api/apply', upload.single('resume'), async (req, res) => {
         res.status(200).json({ message: 'Application sent successfully' });
     } catch (error) {
         console.error('Email error:', error);
-        res.status(500).json({ error: 'Failed to send application. Please try again later.' });
+        res.status(500).json({ error: error.message || 'Failed to send application.' });
     }
 });
 
@@ -201,7 +204,7 @@ app.post('/api/contact', async (req, res) => {
         res.status(200).json({ message: 'Message sent successfully' });
     } catch (error) {
         console.error('Contact Email Error:', error);
-        res.status(500).json({ error: 'Failed to send message. Please try again.' });
+        res.status(500).json({ error: error.message || 'Failed to send message.' });
     }
 });
 
@@ -276,7 +279,7 @@ app.post('/api/partner-onboarding', async (req, res) => {
         res.status(200).json({ message: 'Strategic inquiry submitted' });
     } catch (error) {
         console.error('Partner Portal Error:', error);
-        res.status(500).json({ error: 'Portal synchronization failed. Please use info@aarvify.com directly.' });
+        res.status(500).json({ error: error.message || 'Portal synchronization failed.' });
     }
 });
 
