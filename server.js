@@ -19,7 +19,8 @@ app.use(cors({
     origin: [
         'https://aarvify-jqim.vercel.app',
         'https://aarvify.com',
-        'https://www.aarvify.com'
+        'https://www.aarvify.com',
+        'http://localhost:5173'
     ],
     methods: ['GET', 'POST'],
     credentials: true
