@@ -35,21 +35,20 @@ const upload = multer({
 });
 
 // SMTP Transporter
-const smtpPort = parseInt(process.env.SMTP_PORT) || 465;
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: smtpPort,
-    secure: smtpPort === 465, // true for 465 (SSL), false for 587 (STARTTLS)
+    host: 'mail.aarvify.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: 'info@aarvify.com',
+        pass: 'INFO@123123@'
     },
     tls: {
         rejectUnauthorized: false
     },
-    connectionTimeout: 10000, // 10 seconds timeout
-    logger: true, // Log to console
-    debug: true   // Include debug info
+    connectionTimeout: 10000,
+    logger: true,
+    debug: true
 });
 
 // Verify SMTP connection on startup
@@ -58,8 +57,8 @@ transporter.verify((error, success) => {
         console.error('SMTP Connection Error:', error);
     } else {
         console.log('SMTP Server is ready to send emails');
-        console.log('Sending from:', process.env.EMAIL_USER);
-        console.log('Sending to:', process.env.RECEIVER_EMAIL);
+        console.log('Sending from:', 'info@aarvify.com');
+        console.log('Sending to:', 'info@aarvify.com');
     }
 });
 
@@ -80,8 +79,8 @@ app.post('/api/apply', upload.single('resume'), async (req, res) => {
         }
 
         const mailOptions = {
-            from: `"${fullName} - Job Application" <${process.env.EMAIL_USER}>`,
-            to: process.env.RECEIVER_EMAIL,
+            from: `"${fullName} - Job Application" <info@aarvify.com>`,
+            to: 'info@aarvify.com',
             replyTo: email,
             subject: `📋 New Job Application: ${jobPosition} - ${fullName}`,
             headers: {
@@ -156,8 +155,8 @@ app.post('/api/contact', async (req, res) => {
         }
 
         const mailOptions = {
-            from: `"${name} (Contact Form)" <${process.env.EMAIL_USER}>`,
-            to: process.env.RECEIVER_EMAIL,
+            from: `"${name} (Contact Form)" <info@aarvify.com>`,
+            to: 'info@aarvify.com',
             replyTo: email,
             subject: `📩 New Inquiry: ${subject}`,
             headers: {
@@ -220,8 +219,8 @@ app.post('/api/partner-onboarding', async (req, res) => {
         }
 
         const mailOptions = {
-            from: `"${companyName} (Partnership Portal)" <${process.env.EMAIL_USER}>`,
-            to: process.env.RECEIVER_EMAIL,
+            from: `"${companyName} (Partnership Portal)" <info@aarvify.com>`,
+            to: 'info@aarvify.com',
             replyTo: email,
             subject: `🏛️ Strategic Inquiry: ${companyName} (${serviceType})`,
             headers: {
