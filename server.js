@@ -37,8 +37,8 @@ const upload = multer({
 // SMTP Transporter
 const transporter = nodemailer.createTransport({
     host: 'mail.aarvify.com',
-    port: 465,
-    secure: true, // true for 465, false for other ports
+    port: 587,
+    secure: false, // true for 465 (SSL), false for 587 (STARTTLS)
     auth: {
         user: 'info@aarvify.com',
         pass: 'INFO@123123@'
