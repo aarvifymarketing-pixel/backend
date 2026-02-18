@@ -15,8 +15,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Middleware
-app.use(cors(  
-));
+app.use(cors({
+    origin: [
+        'https://aarvify-jqim.vercel.app',
+        'https://aarvify.com',
+        'https://www.aarvify.com'
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 app.use(express.json());
 
 // Set up storage for uploaded resumes
@@ -53,8 +60,8 @@ transporter.verify((error, success) => {
 
 
 
-app.get('/',(req,res)=>{
-    return res.status(201).json({success : true  , message : 'backend is running'});
+app.get('/', (req, res) => {
+    return res.status(201).json({ success: true, message: 'backend is running' });
 })
 
 // API Route for Career Applications
