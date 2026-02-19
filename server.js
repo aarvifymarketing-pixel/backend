@@ -55,7 +55,7 @@ app.post('/api/apply', upload.single('resume'), async (req, res) => {
         }
 
         const { data, error } = await resend.emails.send({
-            from: 'AARVIFY Careers <careers@aarvify.com>', // MUST be verified domain on Resend
+            from: 'AARVIFY Careers <careers@send.aarvify.com>', // MUST be verified domain on Resend
             to: ['info@aarvify.com'],
             reply_to: email,
             subject: `📋 New Job Application: ${jobPosition} - ${fullName}`,
@@ -105,7 +105,7 @@ app.post('/api/contact', async (req, res) => {
         }
 
         const { data, error } = await resend.emails.send({
-            from: 'AARVIFY Contact <contact@aarvify.com>',
+            from: 'AARVIFY Contact <contact@send.aarvify.com>',
             to: ['info@aarvify.com'],
             reply_to: email,
             subject: `📩 New Inquiry: ${subject}`,
@@ -149,7 +149,7 @@ app.post('/api/partner-onboarding', async (req, res) => {
         }
 
         const { data, error } = await resend.emails.send({
-            from: 'AARVIFY Partners <partners@aarvify.com>',
+            from: 'AARVIFY Partners <partners@send.aarvify.com>',
             to: ['info@aarvify.com'],
             reply_to: email,
             subject: `🏛️ Strategic Inquiry: ${companyName} (${serviceType})`,
