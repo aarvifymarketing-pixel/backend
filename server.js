@@ -18,6 +18,7 @@ const __dirname = dirname(__filename);
 app.use(cors({
     origin: [
         'https://aarvify-jqim.vercel.app',
+        'https://aarvify-jqim-aarvifys-projects.vercel.app',
         'https://aarvify.com',
         'https://www.aarvify.com',
         'http://localhost:5173'
